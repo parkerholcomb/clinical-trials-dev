@@ -1,0 +1,5 @@
+data/*
+*.feather
+
+.vscode
+.DS_Store
