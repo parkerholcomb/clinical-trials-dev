@@ -33,9 +33,7 @@ def protocol_feature_query(limit=1000) -> pd.DataFrame:
         # '_condition':'Condition',
         '_location':'Location',
         # '_eligibility':'EligibilityCriteria',
-        '_enrollment': "EnrollmentCount",
         '_status':'OverallStatus',
-        '_phase':'Phase',
         '_arm': 'ArmGroup',
         '_random': 'DesignAllocation'
     }
@@ -43,16 +41,19 @@ def protocol_feature_query(limit=1000) -> pd.DataFrame:
     for k, v in feature_map.items():
         feature[k] = protocol[v]
 
+    feature['_enrollment'] = protocol['EnrollmentCount'].dropna().astype(int)
+    feature["_phase"] = protocol["Phase"].dropna().apply(lambda x: x[0])
     feature = feature.dropna(subset=['_enrollment','_phase','_random']) # this cleans up a lot
-    
     feature['_location_count'] = protocol['Location'].dropna().apply(lambda x: len(x))
+    # feature['_collaborator_count'] = protocol['Collaborator'].dropna().apply(lambda x: len(x))
+    # feature['_collaborator_count'] = feature['_collaborator_count'].fillna(0)
     feature['_arm_count'] = protocol['ArmGroup'].dropna().apply(lambda x: len(x))
     feature['_start_yr'] = protocol['StartDate'].apply(lambda x: int(x.split(" ")[-1]) if pd.isna(x) == False else None)
     feature['_end_yr'] = protocol['PrimaryCompletionDate'].apply(lambda x: int(x.split(" ")[-1]) if pd.isna(x) == False else None)
     feature['_last_yr'] = protocol['LastUpdateSubmitDate'].apply(lambda x: int(x.split(" ")[-1]) if pd.isna(x) == False else None)
     
-    feature["_phase"] = feature["_phase"].dropna().apply(lambda x: x[0])
-    feature['_enrollment'] = feature['_enrollment'].astype(int)
+
+    # feature['_collaborator_z'] = zscore(feature['_collaborator_count']) 
     feature['_enrollment_z'] = zscore(feature['_enrollment']) 
     feature['_location_count_z'] = zscore(feature['_location_count'].fillna(0)) 
     feature['_arm_count_z'] = zscore(feature['_arm_count'].fillna(0))
