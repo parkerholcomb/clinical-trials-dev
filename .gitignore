@@ -1,4 +1,5 @@
-data/*
+data/lake/*
+data/house/*
 *.feather
 .venv
 dist

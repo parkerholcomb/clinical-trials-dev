@@ -31,10 +31,8 @@ def protocol_query(keys: list, limit: int) -> pd.DataFrame:
     protocol.columns = [col.split(".")[-1] for col in protocol.columns] # yass, much more readable
     return protocol
 
-def protocol_feature_query() -> pd.DataFrame:
+def protocol_feature_query(phases = ['Phase 2','Phase 3','Phase 4']) -> pd.DataFrame:
     df = pd.read_parquet(f"{DATA_BASE}/house/parquet")
-    
-    phases = ['Phase 2','Phase 3','Phase 4']
     df = df[df['_phase'].isin(phases)].reset_index(drop=True)
     return df
 
