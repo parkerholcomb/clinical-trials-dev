@@ -1,5 +1,9 @@
 data/*
 *.feather
+.venv
+dist
+ctgov.egg-info
+_archive
 
 __pycache__
 .vscode
