@@ -1,0 +1,7 @@
+pandas
+plotly
+scikitlearn
+scipy
+pyarrow
+google-cloud-storage
+statsmodels

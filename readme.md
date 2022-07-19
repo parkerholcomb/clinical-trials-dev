@@ -1,4 +1,8 @@
-# to get going
+# Getting Started
+
+
+
+## to pull fresh source data
 
 1. download AllAPIJSON.zip from ClinicalTrials.gov
 2. mkdir data/lake

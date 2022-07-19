@@ -3,7 +3,7 @@ data/house/*
 *.feather
 .venv
 dist
-ctgov.egg-info
+openctgov.egg-info
 _archive
 
 __pycache__
