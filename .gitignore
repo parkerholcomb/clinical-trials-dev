@@ -1,5 +1,11 @@
-data/*
+data/lake/*
+data/house/*
 *.feather
+.venv
+dist
+openctgov.egg-info
+_archive
 
+__pycache__
 .vscode
 .DS_Store
